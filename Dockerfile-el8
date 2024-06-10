@@ -1,5 +1,5 @@
 FROM rockylinux:8
 RUN dnf -y install openssh-clients
 
-COPY survey.bash /survey.bash
+COPY --chmod=0755 survey.bash /survey.bash
 CMD [ "/survey.bash" ]
