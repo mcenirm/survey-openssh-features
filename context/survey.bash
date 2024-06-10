@@ -1,18 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-hr () { echo ............................................................ ; }
+hr () {
+  echo
+  echo ............................................................
+  echo
+}
 
-hr
+_x () {
+  ( set -x ; "$@" )
+  hr
+}
 
-cat /etc/os-release
 
-hr
+_x cat /etc/os-release
 
-ssh -V
+_x ssh -V
 
-hr
+for n in $(ssh -Q help)
+do
+  _x ssh -Q "$n"
+done
 
-ssh -Q help
+_x ssh -G example@example.com
 
-hr
+_x sshd -T
